@@ -1,12 +1,15 @@
 sudo: required
 services:
 - docker
-
-
 before_install:
 - docker build -t brianndungu/coursefinder:1.0.0 .
 script:
-    #log in to docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    #take built images and push to Docker hub
-  - docker push brianndungu/coursefinder:1.0.0
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+- docker push brianndungu/coursefinder:1.0.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: YbNE/HzP/y+aaO5FfsxKapp2gvM/vFAg9vaAkfSf7d1fuo5dKwK+e1A9f5qy0RC8GOb4NVT9NGQyXs/iCYIe0wyl/gQQevwFtb1I5G8IbWRYPJLhpIlpaka/i37e7OzeoWCST39OYEzA6MAzM4Z9B0BkQaO1XcX+T0IJVc/9VBtiSU/aEbVsq4ZgZe4CH0tNjgOQfRWOPVIH7wO/QHp+s0RXepKuOwEzgT5I0lJsGOMnWbJ1AH+d0H5THHfuol0owid56KTNQIjoX/warw7bPFayeqzmP26BOw9eVWZcFd+SgBGNYCDfWeJG+OSD9qSTX4X01xMrh5vq1HnoN4guJzGZSpzASeSIlL3f65sSB0ub68X90csmvR/tacXSx7cGfdrNnWXwJSRHbcRrtOr11D8JGGJGDG//Dm3tErrvmy9LDKxckd8DrpSRPfefQIbabZx4gRpqLXCcHyMOa+Soqfv4w4B/+2PNPA5pCDxxfp2Lr8Tx3JvTKfN34O6IitcjqixtscRLduXHxq19U74x5EcNilPMoUMcsH/+mv4PB/MqU+U4NyL9Aw+/F0/fPFVZ0sBVU8mNxgKy6xG0F/wGQJ+/9Bv0rIN0RCYC7cgqjJoyEv0o6YAZv5QhKe97yAvprYiibqN4SAQDTwdvFumNDGEJQ8Bis4kKuIeOM5xt3tk=
+  app: coursesearch1
+  on:
+    repo: https://github.com/brianndungunjenga/courseFinder
